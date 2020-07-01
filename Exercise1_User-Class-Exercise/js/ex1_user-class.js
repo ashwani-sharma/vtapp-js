@@ -4,7 +4,7 @@ class User {
     this.age = age;
   }
 
-  comapre(person) {
+  compare(person) {
     if(this.age > person.age) {
       document.write(`${this.name} is older than ${person.name}`);
     }
@@ -21,5 +21,5 @@ window.onload = function() {
   var user1 = new User('John', 36);
   var user2 = new User('Mary', 32);
 
-  user1.comapre(user2);
+  user1.compare(user2);
 }
