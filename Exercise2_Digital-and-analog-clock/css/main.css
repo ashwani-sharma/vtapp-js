@@ -1,0 +1,32 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.buttons-row {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  tranform: translateY(-50%);
+}
+
+.buttons-row .button {
+  height: 50px;
+  margin: 0 20px;
+  padding: 0 20px;
+  border: none;
+  color: #fff;
+  font-family: arial;
+  font-size: 24px;
+  background: #1a73e8;
+  border-radius: 5px;
+  cursor: pointer;
+}
