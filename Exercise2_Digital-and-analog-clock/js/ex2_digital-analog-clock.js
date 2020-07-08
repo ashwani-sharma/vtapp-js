@@ -1,6 +1,6 @@
 class Clock {
   constructor(button) {
-    this.button = document.querySelectorAll('[data-time]');
+    this.button = button;
   }
 
   setTime() {
@@ -10,29 +10,34 @@ class Clock {
       hours: date.getHours(),
       minutes: date.getMinutes(),
       seconds: date.getSeconds(),
-      meridiem: 'AM'
     }
   }
 
-  setHourAndMeridiem() {
+  setHour() {
     let hrs = this.setTime().hours;
-    let mrdm = this.setTime().meridiem;
 
     if(hrs == 0) {
       hrs = 12;
     }
     else if(hrs > 12) {
-      mrdm = 'PM';
       hrs = hrs - 12;
     }
 
-    return [hrs, mrdm];
+    return hrs;
+  }
+
+  init() {
+    this.button.forEach(element => {
+      element.addEventListener('click', () => {
+        this.showTime();
+      });
+    });
   }
 }
 
 class AnalogClock extends Clock {
-  showAnalogTime() {
-    let hour = this.setHourAndMeridiem()[0];
+  showTime() {
+    let hour = this.setHour();
     let hourHand = hour * 30;
     let minuteHand = this.setTime().minutes * 6;
     let secondHand = this.setTime().seconds * 6;
@@ -40,47 +45,25 @@ class AnalogClock extends Clock {
 
     alert(showTime);
   }
-
-  init() {
-    let _this = this;
-    let btn = this.button;
-
-    btn.forEach(function (element) {
-      element.addEventListener('click', function() {
-        if(this.dataset.time == 'analog') {
-          _this.showAnalogTime();
-        }
-      });
-    });
-  }
 }
 
 class DigitalClock extends Clock {
-  showDigitalTime() {
-    let hour = this.setHourAndMeridiem()[0];
-    let mrdns = this.setHourAndMeridiem()[1];
-    let showTime = `${hour} : ${this.setTime().minutes} : ${this.setTime().seconds} ${mrdns}`;
+  showTime() {
+    let hour = this.setHour();
+    let currentTime = this.setTime();
+    let meridiem = currentTime.hours > 12 ? 'PM' : 'AM';
+    let showTime = `${hour} : ${currentTime.minutes} : ${currentTime.seconds} ${meridiem}`;
 
     alert(showTime);
-  }
-
-  init() {
-    let _this = this;
-    let btn = this.button;
-
-    btn.forEach(function (element) {
-      element.addEventListener('click', function() {
-        if(this.dataset.time == 'digital') {
-          _this.showDigitalTime();
-        }
-      });
-    });
   }
 }
 
 window.onload = function () {
-  let analogClock = new AnalogClock();
-  let digitalClock = new DigitalClock();
+  let analogButton = document.querySelectorAll('[data-time="analog"]');
+  let digitalButton = document.querySelectorAll('[data-time="digital"]');
+
+  let analogClock = new AnalogClock(analogButton);
+  let digitalClock = new DigitalClock(digitalButton);
 
   analogClock.init();
   digitalClock.init();
