@@ -1,0 +1,16 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+table.brdr { border:solid 1px #cacaca; border-collapse:collapse; }
+table.brdr td { border-bottom:solid 1px #cacaca; border-left:solid 1px #cacaca; padding:5px; }
+a { font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#c00000; font-weight:bold; text-decoration:none; }
+a:hover { color:#FF0000; text-decoration:none; }
