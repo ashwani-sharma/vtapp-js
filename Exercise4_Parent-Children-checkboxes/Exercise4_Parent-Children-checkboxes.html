@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Exercise 4 - Parent and Children Checkboxes</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+  </head>
+  <body>
+
+    <ul id="container">
+      <li class="parent">
+        <input type="checkbox" id="colors" data-parent=""> <label for="colors">Colors</label>
+        <ul class="child-container" id="colors-list" style="display: none;">
+          <li class="child"><input type="checkbox" data-child=""> Red</li>
+          <li class="child"><input type="checkbox" data-child=""> Yellow</li>
+          <li class="child"><input type="checkbox" data-child=""> Green</li>
+          <li class="child"><input type="checkbox" data-child=""> Blue</li>
+        </ul>
+      </li>
+      <li class="parent">
+        <input type="checkbox" id="movies" data-parent=""> <label for="movies">Movies</label>
+        <ul class="child-container" id="movies-list" style="display: none;">
+          <li class="child"><input type="checkbox" data-child=""> Darr</li>
+          <li class="child"><input type="checkbox" data-child=""> Sir</li>
+        </ul>
+      </li>
+      <li class="parent">
+        <input type="checkbox" id="drinks" data-parent=""> <label for="drinks">Drinks</label>
+        <ul class="child-container" id="drinks-list" style="display: none;">
+          <li class="child"><input type="checkbox" data-child=""> Coke</li>
+          <li class="child"><input type="checkbox" data-child=""> Pepsi</li>
+          <li class="child"><input type="checkbox" data-child=""> Dew</li>
+        </ul>
+      </li>
+      <li class="parent">
+        <input type="checkbox" id="bikes" data-parent=""> <label for="bikes">Bikes</label>
+        <ul class="child-container" id="bikes-list" style="display: none;">
+          <li class="child"><input type="checkbox" data-child=""> V-Rod</li>
+          <li class="child"><input type="checkbox" data-child=""> Pulsar</li>
+          <li class="child"><input type="checkbox" data-child=""> CBZ</li>
+        </ul>
+      </li>
+    </ul>
+
+    <script type="text/javascript" src="js/Exercise4_Parent-Children-checkboxes.js"></script>
+  </body>
+</html>
