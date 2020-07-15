@@ -1,63 +1,63 @@
+const maxSelection = 3;
+
 class CheckboxManager {
-  constructor(maxSelection, daysCheckBoxes, noneCheckBox) {
-    this.maxSelection = maxSelection;
+  constructor(daysCheckBoxes, noneCheckBox) {
     this.daysCheckBoxes = daysCheckBoxes;
     this.noneCheckBox = noneCheckBox;
     this.daysArray = [];
   }
 
   saveSelectedCheckBoxes() {
-    let _this = this;
     let checkboxes = this.daysCheckBoxes;
     let daysCollection = this.daysArray;
 
     for(let i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].addEventListener('click', function() {
-        let val = this.value;
-        let indx = daysCollection.indexOf(val);
+      checkboxes[i].addEventListener('click', () => {
+        let item = checkboxes[i];
+        let val = item.value;
 
-        if(this.checked) {
+        if(item.checked) {
           daysCollection.push(val);
-          _this.alertDaysSelection(daysCollection, _this.maxSelection, this);
-          _this.noneCheckBox.checked = false;
+          daysCollection.length > maxSelection ? this.alertDaysSelection(item) : '';
+          this.noneCheckBox.checked = false;
         }
-        else if(!this.checked) {
-          daysCollection.splice(indx, 1);
+        else if(!item.checked) {
+          daysCollection.splice(daysCollection.indexOf(val), 1);
         }
       });
     }
   }
 
-  alertDaysSelection(arr, maxSelection, self) {
-    if(arr.length > maxSelection) {
-      alert('Only 3 days can be selected. You have already selected ' + arr[0] +', ' + arr[1] +' and ' + arr[2]);
-      self.checked = false;
-      arr.pop();
-    }
+  alertDaysSelection(self) {
+    let arr = this.daysArray;
+
+    alert('Only 3 days can be selected. You have already selected ' + arr[0] +', ' + arr[1] +' and ' + arr[2]);
+    self.checked = false;
+    arr.pop();
   }
 
   noneCheckBoxEvent() {
-    let _this = this;
+    let noneCheck = this.noneCheckBox;
 
-    this.noneCheckBox.addEventListener('click', function() {
-      if(this.checked) {
-        _this.uncheckAllSelectedCheckBoxes(_this.daysCheckBoxes, _this.daysArray);
+    noneCheck.addEventListener('click', () => {
+      if(noneCheck.checked) {
+        this.uncheckAllSelectedCheckBoxes();
       }
       else {
-        this.checked = false;
+        noneCheck.checked = false;
       }
     });
   }
 
-  uncheckAllSelectedCheckBoxes(inputs, arr) {
-    inputs.forEach(function(elem) {
+  uncheckAllSelectedCheckBoxes() {
+    this.daysCheckBoxes.forEach(function(elem) {
       if(elem.checked) {
         elem.checked = false;
       }
     });
 
     this.checked = true;
-    arr.length = 0;
+    this.daysArray.length = 0;
   }
 
   init() {
@@ -70,6 +70,6 @@ window.onload = function() {
   let daysCheckBoxes = document.querySelectorAll('[data-name]');
   let noneCheckBox = document.getElementById('none');
 
-  let checkboxManager = new CheckboxManager(3, daysCheckBoxes, noneCheckBox);
+  let checkboxManager = new CheckboxManager(daysCheckBoxes, noneCheckBox);
   checkboxManager.init();
 }
