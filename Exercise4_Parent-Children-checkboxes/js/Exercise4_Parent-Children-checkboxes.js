@@ -3,12 +3,10 @@ class Catagories {
     this.parentInput = parentInput;
   }
 
-  bindEventWithParentInput() {
-    let _this = this;
-    
-    this.parentInput.forEach(function(e) {
-      e.addEventListener('click', function() {
-        this.checked ? _this.childElementsWithContainer(this, true, 'block') : _this.childElementsWithContainer(this, false, 'none');
+  bindEventWithParentInput() {    
+    this.parentInput.forEach((checkBox) => {
+      checkBox.addEventListener('click', () => {
+        checkBox.checked ? this.childElementsWithContainer(checkBox, true, 'block') : this.childElementsWithContainer(checkBox, false, 'none');
       });
     });
   }
