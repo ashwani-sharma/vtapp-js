@@ -1,0 +1,55 @@
+<!--Exercise for form validation-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Form Validation</title>
+
+<link rel="stylesheet" type="text/css" href="css/Exercise5_Form-validation.css" />
+
+</head>
+
+<body>
+<div id="container">
+  <div class="heading">Registration Form</div>
+  <form id="user-form">
+    <ul>
+      <li>
+        <dl>
+          <dd><span class="label">Login Id</span></dd>
+          <dt><input type="text" name="login-id" class="required" data-input=""></dt>
+        </dl>
+        <dl>
+          <dd><span class="label">Email</span></dd>
+          <dt><input type="text" name="email" class="required" data-input=""></dt>
+        </dl>
+        <dl>
+          <dd><span class="label">Name</span></dd>
+          <dt><input type="text" name="name" class="required" data-input=""></dt>
+        </dl>
+        <dl>
+          <dd><span class="label">Timezone</dd>
+          <dt>
+            <select id="gmt" name="timezone">
+              <option value="GMT">GMT</option>
+              <option value="GMT">IST</option>
+            </select>
+          </dt>
+        </dl>
+        <dl>
+          <dd><span class="label">Homepage</span></dd>
+          <dt><input type="text" name="homepage" id="homepage" class="required" data-input=""></dt>
+        </dl>
+        <dl><span class="label">About Me</span><br>
+          <textarea id="about" name="about-me" rows="8" cols="27" class="required" data-input=""></textarea>
+        </dl>
+        <dl><input type="checkbox" name="notification" id="notification"><label for="notification">Receive notification of comments</label></dl>
+        <dl><input type="submit" id="go" value="GO"></dl>
+      </li>
+    </ul>
+  </form>
+</div>
+<script language="javascript" src="js/Exercise5_Form-validation.js"></script>
+</body>
+</html>
