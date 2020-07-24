@@ -6,15 +6,12 @@ const errors = {
 }
 
 class ValidateForm {
-  constructor(form, inputs, textarea, checkbox) {
-    this.form = form;
-    this.inputs = inputs;
-    this.textarea = textarea;
-    this.checkbox = checkbox;
+  constructor(DOM) {
+    this.options = DOM;
   }
 
   checkInputFields() {
-    this.inputs.forEach(function(elem) {
+    this.options.inputs.forEach(function(elem) {
       if(elem.value.trim() == '') {
         alert(`${elem.name} ${errors.empty}`);
         return false;
@@ -25,7 +22,7 @@ class ValidateForm {
   }
 
   checkTextarea() {
-    let txtarea = this.textarea;
+    let txtarea = this.options.textarea;
 
     if(txtarea.value.length > 0 && txtarea.value.length < maxCharLen) {
       alert(`${txtarea.name} ${errors.textLength}`);
@@ -36,7 +33,7 @@ class ValidateForm {
   }
 
   checkCheckBoxState() {
-    let notification = this.checkbox;
+    let notification = this.options.checkbox;
 
     if(!notification.checked) {
       alert(`${notification.name} ${errors.state}`);
@@ -49,7 +46,7 @@ class ValidateForm {
   formSubmission() {
     let _this = this;
 
-    this.form.onsubmit = function() {
+    this.options.form.onsubmit = function() {
       if(_this.checkInputFields() & _this.checkTextarea() & _this.checkCheckBoxState()) {
         return true;
       }
@@ -61,11 +58,13 @@ class ValidateForm {
 }
 
 window.onload = function() {
-  let form = document.getElementById('user-form');
-  let inputs = document.querySelectorAll('[data-input]');
-  let textarea = document.getElementById('about');
-  let checkbox = document.getElementById('notification');
+  let DOM_Elements = {
+    form: document.querySelector('[data-form]'),
+    inputs: document.querySelectorAll('[data-input]'),
+    textarea: document.querySelector("[data-input='textarea']"),
+    checkbox: document.querySelector('[data-notification]')
+  }
 
-  let formValidation = new ValidateForm(form, inputs, textarea, checkbox);
+  let formValidation = new ValidateForm(DOM_Elements);
   formValidation.formSubmission();
 }

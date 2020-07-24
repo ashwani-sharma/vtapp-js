@@ -13,7 +13,7 @@
 <body>
 <div id="container">
   <div class="heading">Registration Form</div>
-  <form id="user-form">
+  <form id="user-form" data-form="">
     <ul>
       <li>
         <dl>
@@ -42,9 +42,9 @@
           <dt><input type="text" name="homepage" id="homepage" class="required" data-input=""></dt>
         </dl>
         <dl><span class="label">About Me</span><br>
-          <textarea id="about" name="about-me" rows="8" cols="27" class="required" data-input=""></textarea>
+          <textarea id="about" name="about-me" rows="8" cols="27" class="required" data-input="textarea"></textarea>
         </dl>
-        <dl><input type="checkbox" name="notification" id="notification"><label for="notification">Receive notification of comments</label></dl>
+        <dl><input type="checkbox" name="notification" id="notification" data-notification=""><label for="notification">Receive notification of comments</label></dl>
         <dl><input type="submit" id="go" value="GO"></dl>
       </li>
     </ul>

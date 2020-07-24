@@ -1,41 +1,43 @@
+/* jshint esversion: 6 */
+
 class MoveValues {
-  constructor(buttons, selectPrimary, selectSecondary) {
-    this.buttons = buttons;
-    this.selectPrimary = selectPrimary;
-    this.selectSecondary = selectSecondary;
+  constructor(DOM) {
+    this.elements = DOM;
   }
 
-  checkSelectedOptions(src, dest) {
-    let options = Array.from(src.selectedOptions);
+  moveSelectedOptions(src, dest) {
+    let optionsSelected = Array.from(src.selectedOptions);
 
-    options.forEach(function(option) {
+    optionsSelected.forEach(function(option) {
       dest.add(option);
     });
   }
 
-  bindButtonEvents(btn, add, remove) {
+  bindButtonEvents(btn) {
     btn.addEventListener('click', () => {
-      if(btn.dataset.button == add) {
-        this.checkSelectedOptions(this.selectPrimary, this.selectSecondary);
+      if(btn.dataset.button == 'add') {
+        this.moveSelectedOptions(this.elements.selectPrimary, this.elements.selectSecondary);
       }
-      else if(btn.dataset.button == remove) {
-        this.checkSelectedOptions(this.selectSecondary, this.selectPrimary);
+      else if(btn.dataset.button == 'remove') {
+        this.moveSelectedOptions(this.elements.selectSecondary, this.elements.selectPrimary);
       }
     });
   }
 
-  moveOptions(add, remove) {
-    this.buttons.forEach((elem) => {
-      this.bindButtonEvents(elem, add, remove);
+  init() {
+    this.elements.buttons.forEach((elem) => {
+      this.bindButtonEvents(elem);
     });
   }
 }
 
 window.onload = function() {
-  let buttons = document.querySelectorAll('[data-button]');
-  let selectPrimary = document.getElementById('primary');
-  let selectSecondary = document.getElementById('secondary');
+  let DOM_Elements = {
+    buttons: document.querySelectorAll("[data-button]"),
+    selectPrimary: document.querySelector("[data-select='primary']"),
+    selectSecondary: document.querySelector("[data-select='secondary']")
+  };
 
-  let changeValues = new MoveValues(buttons, selectPrimary, selectSecondary);
-  changeValues.moveOptions('add', 'remove');
-}
+  let changeValues = new MoveValues(DOM_Elements);
+  changeValues.init();
+};
