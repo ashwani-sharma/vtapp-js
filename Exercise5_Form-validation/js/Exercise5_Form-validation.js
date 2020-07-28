@@ -1,17 +1,21 @@
 const maxCharLen = 50;
 const errors = {
-  empty: 'cant be empty',
-  textLength: 'should have minimum ' + maxCharLen + ' characters',
-  state: 'shoud be checked'
+  empty: `cant be empty`,
+  textLength: `should have minimum ${maxCharLen} characters`,
+  state: `shoud be checked`
 }
 
 class ValidateForm {
-  constructor(DOM) {
-    this.options = DOM;
+  constructor(options) {
+    this.elements = options;
+    this.form = this.elements.form;
+    this.fields = Array.from(this.elements.inputs);
+    this.txtarea = this.elements.textarea;
+    this.notification = this.elements.checkbox;
   }
 
   checkInputFields() {
-    this.options.inputs.forEach(function(elem) {
+    this.fields.map((elem) => {
       if(elem.value.trim() == '') {
         alert(`${elem.name} ${errors.empty}`);
         return false;
@@ -22,10 +26,8 @@ class ValidateForm {
   }
 
   checkTextarea() {
-    let txtarea = this.options.textarea;
-
-    if(txtarea.value.length > 0 && txtarea.value.length < maxCharLen) {
-      alert(`${txtarea.name} ${errors.textLength}`);
+    if(this.txtarea.value.length > 0 && this.txtarea.value.length < maxCharLen) {
+      alert(`${this.txtarea.name} ${errors.textLength}`);
       return false;
     }
 
@@ -33,10 +35,8 @@ class ValidateForm {
   }
 
   checkCheckBoxState() {
-    let notification = this.options.checkbox;
-
-    if(!notification.checked) {
-      alert(`${notification.name} ${errors.state}`);
+    if(!this.notification.checked) {
+      alert(`${this.notification.name} ${errors.state}`);
       return false;
     }
 
@@ -44,27 +44,24 @@ class ValidateForm {
   }
 
   formSubmission() {
-    let _this = this;
-
-    this.options.form.onsubmit = function() {
-      if(_this.checkInputFields() & _this.checkTextarea() & _this.checkCheckBoxState()) {
+    this.form.addEventListener('submit', (e) => {
+      if(this.checkInputFields() & this.checkTextarea() & this.checkCheckBoxState()) {
         return true;
       }
-      else {
-        return false;
-      }
-    }
+
+      e.preventDefault();
+    });
   }
 }
 
 window.onload = function() {
-  let DOM_Elements = {
+  const options = {
     form: document.querySelector('[data-form]'),
     inputs: document.querySelectorAll('[data-input]'),
-    textarea: document.querySelector("[data-input='textarea']"),
+    textarea: document.querySelector('[data-input=textarea]'),
     checkbox: document.querySelector('[data-notification]')
   }
 
-  let formValidation = new ValidateForm(DOM_Elements);
+  let formValidation = new ValidateForm(options);
   formValidation.formSubmission();
 }
