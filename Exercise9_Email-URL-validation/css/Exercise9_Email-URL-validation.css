@@ -1,0 +1,95 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+#container {
+  width:400px;
+  margin:0px auto;
+  padding:0px 0px 10px;
+  overflow:hidden;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:13px;
+  background:#e8f2d7;
+  border-radius:0px 0px 10px 10px;
+  -moz-border-radius:0px 0px 10px 10px;
+}
+
+.confirmMessage {
+  margin-bottom:10px;
+  border:solid 1px #c00000;
+  padding:5px 10px;
+  color:#FFFFFF;
+  font-weight:bold;
+  background:#FF0000;
+}
+
+.heading {
+  width:100%;
+  padding:5px 0px;
+  color:#FFFFFF;
+  font-weight:bold;
+  text-align:center;
+  background:#9ab368;
+}
+
+ul {
+  width:100%;
+  margin:0px;
+  padding:10px 20px;
+  float:left;
+  list-style:none;
+}
+
+ul li {
+  width:100%;
+  margin:0px;
+  padding:0px;
+  float:left;
+  list-style:none;
+}
+
+ul li dl {
+  width:100%;
+  margin:0px;
+  padding:10px 0px;
+  float:left;
+  list-style:none;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:12px;
+}
+
+ul li dl.btn {
+  text-align: center;
+}
+
+ul li dl.btn span {
+  display: block;
+}
+
+ul li dl dd {
+  width:20%;
+  margin:0px;
+  padding:4px 0px 0px;
+  float:left;
+  list-style:none;
+}
+
+ul li dl dt {
+  width:78%;
+  margin:0px;
+  padding:0px;
+  list-style:none;
+  float:right;
+}
+
+ul li dl input[type='text'],
+ul li dl textarea {
+  width: 100%;
+}
+
+ul li dl dt span {
+  clear:both;
+  display:block;
+}

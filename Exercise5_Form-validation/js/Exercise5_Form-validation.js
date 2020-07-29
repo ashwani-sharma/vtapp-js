@@ -35,6 +35,7 @@ class ValidateForm {
   }
 
   checkCheckBoxState() {
+    debugger;
     if(!this.notification.checked) {
       alert(`${this.notification.name} ${errors.state}`);
       return false;
