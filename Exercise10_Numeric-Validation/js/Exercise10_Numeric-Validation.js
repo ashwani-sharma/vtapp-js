@@ -41,4 +41,4 @@ window.onload = function() {
 
   let validateForm = new NumericValidation(options);
   validateForm.formSubmission();
-}
+};
