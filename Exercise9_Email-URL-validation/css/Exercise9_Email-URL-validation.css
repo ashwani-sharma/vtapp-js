@@ -65,6 +65,7 @@ ul li dl.btn {
 }
 
 ul li dl.btn span {
+  margin-bottom: 5px;
   display: block;
 }
 
@@ -87,9 +88,4 @@ ul li dl dt {
 ul li dl input[type='text'],
 ul li dl textarea {
   width: 100%;
-}
-
-ul li dl dt span {
-  clear:both;
-  display:block;
 }

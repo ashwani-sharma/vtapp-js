@@ -1,5 +1,7 @@
-const regexEmail = /^[a-zA-Z0-9\._-]{2,}@[a-z0-9]{2,}\.[a-z]{2,5}(\.[a-z]{2,4})?$/;
-const regexUrl = /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/|www\.)([a-zA-Z0-9-]{2,})\.[a-z]{2,4}(\.[a-z]{2,4})?$/;
+const regex = {
+  email: /^[a-zA-Z0-9\._-]{2,}@[a-z0-9]{2,}\.[a-z]{2,5}(\.[a-z]{2,4})?$/,
+  url: /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/|www\.)([a-zA-Z0-9-]{2,})\.[a-z]{2,4}(\.[a-z]{2,4})?$/
+}
 
 class FormValidation {
   constructor(elements) {
@@ -21,7 +23,7 @@ class FormValidation {
 
   formSubmission() {
     this.form.addEventListener('submit', (e) => {
-      if(this.checkInputsValidation(regexEmail, this.emailInput) && this.checkInputsValidation(regexUrl, this.urlInput)) {
+      if(this.checkInputsValidation(regex.email, this.emailInput) && this.checkInputsValidation(regex.url, this.urlInput)) {
         return true;
       }
 
