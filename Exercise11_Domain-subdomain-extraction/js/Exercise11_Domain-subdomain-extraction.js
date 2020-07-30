@@ -1,6 +1,6 @@
-const regex = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:((?:[\w\-]{1,})?)(?:\.))*?([\w\-]{1,}\.[a-z]{2,4}(?:\.[a-z]{2,4})?)(?:\/[\w\-]{2,}(?:\.[a-z]{2,4})?)*?$/;
+const REGEX = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]{1,})?)(?:\.))*?(?<domain>[\w\-]{1,}\.[a-z]{2,4}(?:\.[a-z]{2,4})?)(?:\/[\w\-]{2,}(?:\.[a-z]{2,4})?)*?$/;
 
-class DomainSubDomainMatching {
+class MatchDomain {
   constructor(options) {
     this.elements = options;
     this.form = this.elements.form;
@@ -8,24 +8,26 @@ class DomainSubDomainMatching {
   }
 
   validateURL(pattern, field) {
-    if(!field.value.match(pattern)) {
+    let groupName = field.value.match(pattern);
+
+    if(!groupName) {
       alert('please enter a valid URL');
       field.focus();
       return false;
     }
     
-    if(!RegExp.$1) {
-      alert('Domain: ' + RegExp.$2);
+    if(groupName.groups.sub === undefined) {
+      alert('Domain: ' + groupName.groups.domain);
     }
     else {
-      alert('Sub Domain: ' + RegExp.$1 + '\nDomain: ' + RegExp.$2);
+      alert('Sub Domain: ' + groupName.groups.sub + '\nDomain: ' + groupName.groups.domain);
     }
   }
 
   formSubmission() {
     this.form.addEventListener('submit', (e) => {
-      if(this.validateURL(regex, this.input)) {
-        this.true;
+      if(this.validateURL(REGEX, this.input)) {
+        return true;
       }
 
       e.preventDefault();
@@ -34,11 +36,11 @@ class DomainSubDomainMatching {
 }
 
 window.onload = function() {
-  const options = {
+  const OPTIONS = {
     form: document.querySelector('[data-form]'),
     input: document.querySelector('[data-input]')
   };
 
-  let validateForm = new DomainSubDomainMatching(options);
+  let validateForm = new MatchDomain(OPTIONS);
   validateForm.formSubmission();
 };
