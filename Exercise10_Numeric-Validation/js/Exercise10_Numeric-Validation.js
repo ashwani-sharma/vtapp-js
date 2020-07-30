@@ -1,4 +1,4 @@
-const regex = /^[\-\+]?[0-9]{1,}(\.[0-9]{0,})?\d$/;
+const NUMERIC_PATTERN = /^[\-\+]?[\d]*(?:\.[\d]*)?$/;
 
 class NumericValidation {
   constructor(options) {
@@ -8,22 +8,22 @@ class NumericValidation {
     this.result = this.elements.result;
   }
 
-  checkInputValidation(pattern, input, message) {
-    if(!pattern.test(input.value)) {
+  checkInputValidation() {
+    if(!NUMERIC_PATTERN.test(this.numberField.value)) {
       alert('invalid input');
-      message.value = 'false';
-      input.focus();
+      this.result.value = 'false';
+      this.numberField.focus();
       return false;
     }
     else {
-      message.value = 'true';
+      this.result.value = 'true';
       return true;
     }
   }
 
-  formSubmission() {
+  init() {
     this.form.addEventListener('submit', (e) => {
-      if(this.checkInputValidation(regex, this.numberField, this.result)) {
+      if(this.checkInputValidation()) {
         return true;
       }
 
@@ -33,12 +33,12 @@ class NumericValidation {
 }
 
 window.onload = function() {
-  const options = {
+  const OPTIONS = {
     form: document.querySelector('[data-id=form]'),
     number: document.querySelector('[data-input=number]'),
     result: document.querySelector('[data-input=result]')
   };
 
-  let validateForm = new NumericValidation(options);
-  validateForm.formSubmission();
+  let validateForm = new NumericValidation(OPTIONS);
+  validateForm.init();
 };
