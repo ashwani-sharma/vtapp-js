@@ -1,4 +1,4 @@
-const REGEX = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]{1,})?)(?:\.))*?(?<domain>[\w\-]{1,}\.[a-z]{2,4}(?:\.[a-z]{2,4})?)(?:\/[\w\-]{2,}(?:\.[a-z]{2,4})?)*?$/;
+const PATTERN_URL = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[a-zA-Z0-9\-]*)?)(?:\.))*?(?<domain>[\a-zA-Z0-9\-]*\.[a-z]{2,4}(?:\.[a-z]{2,4})?)(?:\/[\w\-]{2,}(?:\.[a-z]{2,4})?)*?$/;
 
 class MatchDomain {
   constructor(options) {
@@ -7,12 +7,12 @@ class MatchDomain {
     this.input = this.elements.input;
   }
 
-  validateURL(pattern, field) {
-    let groupName = field.value.match(pattern);
+  validateURL() {
+    let groupName = this.input.value.match(PATTERN_URL);
 
     if(!groupName) {
       alert('please enter a valid URL');
-      field.focus();
+      this.input.focus();
       return false;
     }
     
@@ -26,7 +26,7 @@ class MatchDomain {
 
   formSubmission() {
     this.form.addEventListener('submit', (e) => {
-      if(this.validateURL(REGEX, this.input)) {
+      if(this.validateURL()) {
         return true;
       }
 
@@ -36,11 +36,11 @@ class MatchDomain {
 }
 
 window.onload = function() {
-  const OPTIONS = {
+  let options = {
     form: document.querySelector('[data-form]'),
     input: document.querySelector('[data-input]')
   };
 
-  let validateForm = new MatchDomain(OPTIONS);
+  let validateForm = new MatchDomain(options);
   validateForm.formSubmission();
 };
