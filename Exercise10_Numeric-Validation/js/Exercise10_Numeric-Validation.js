@@ -1,4 +1,4 @@
-const NUMERIC_PATTERN = /^[\-\+]?[\d]*(?:\.[\d]*)?$/;
+const NUMERIC_PATTERN = /^[\-\+]?[0-9]*(?:\.[0-9]*)?\d$/;
 
 class NumericValidation {
   constructor(options) {
@@ -33,12 +33,12 @@ class NumericValidation {
 }
 
 window.onload = function() {
-  const OPTIONS = {
+  let options = {
     form: document.querySelector('[data-id=form]'),
     number: document.querySelector('[data-input=number]'),
     result: document.querySelector('[data-input=result]')
   };
 
-  let validateForm = new NumericValidation(OPTIONS);
+  let validateForm = new NumericValidation(options);
   validateForm.init();
 };
