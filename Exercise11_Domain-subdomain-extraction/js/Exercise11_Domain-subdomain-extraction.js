@@ -1,4 +1,4 @@
-const PATTERN_URL = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]{1,})*?)?)(?:\.){1}(?<domain>[\w\-]{1,}\.[a-z]{2,4}(?:\.[a-z]{2,4})?)(?:\/[\w\-]{2,}(?:\.[a-z]{2,4})?)*?(?:[\w\d\/])*$/;
+const PATTERN_URL = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]{1,})*?)?)(?:\.){1}(?<domain>[\w\-]{1,}\.[a-z]{2,4}(?:\.[a-z]{2,4})?)(?:[\w\d\/\?\=\%\&\.\-\#]*)?$/;
 
 class MatchDomain {
   constructor(options) {
