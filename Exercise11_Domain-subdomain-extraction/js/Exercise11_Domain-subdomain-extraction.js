@@ -1,13 +1,13 @@
-const PATTERN_URL = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]{1,})*?)?)(?:\.){1}(?<domain>[\w\-]{1,}\.[a-z]{2,4}(?:\.[a-z]{2,4})?)(?:[\w\d\/\?\=\%\&\.\-\#]*)?$/;
+const PATTERN_URL = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]*)?)(?:\.))?(?<domain>[\w\-]{1,}\.[a-z]{2,}(?:\.[a-z]{2,})?)(?:\/[\w\-\.\%\=\&\?\#]*)*?$/;
 
-class MatchDomain {
+class Address {
   constructor(options) {
     this.elements = options;
     this.form = this.elements.form;
     this.input = this.elements.input;
   }
 
-  validateURL() {
+  validateAndMatchURL() {
     let groupName = this.input.value.match(PATTERN_URL);
 
     if(!groupName) {
@@ -15,18 +15,22 @@ class MatchDomain {
       this.input.focus();
       return false;
     }
-    
-    if(groupName.groups.sub === undefined) {
-      alert('Domain: ' + groupName.groups.domain);
+
+    this.urlExtraction(groupName);
+  }
+
+  urlExtraction(url) {
+    if(url.groups.sub === undefined) {
+      alert('Domain: ' + url.groups.domain);
     }
     else {
-      alert('Sub Domain: ' + groupName.groups.sub + '\nDomain: ' + groupName.groups.domain);
+      alert('Sub Domain: ' + url.groups.sub + '\nDomain: ' + url.groups.domain);
     }
   }
 
-  formSubmission() {
+  init() {
     this.form.addEventListener('submit', (e) => {
-      if(this.validateURL()) {
+      if(this.validateAndMatchURL()) {
         return true;
       }
 
@@ -41,6 +45,6 @@ window.onload = function() {
     input: document.querySelector('[data-input]')
   };
 
-  let validateForm = new MatchDomain(options);
-  validateForm.formSubmission();
+  let address = new Address(options);
+  address.init();
 };
