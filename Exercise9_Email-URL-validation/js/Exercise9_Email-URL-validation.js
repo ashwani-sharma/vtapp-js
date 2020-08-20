@@ -6,34 +6,27 @@ class FormValidation {
   }
 
   validateEmail() {
-    let email = this.form['email'];
+    let email = this.form.email;
 
     if(!this.regexEmail.test(email.value)) {
       alert(`please enter a valid ${email.name}`);
-      return false;
+      event.preventDefault();
     }
-
-    return true;
   }
 
   validateURL() {
-    let url = this.form['url'];
+    let url = this.form.url;
 
     if(!this.regexURL.test(url.value)) {
       alert(`please enter a valid ${url.name}`);
-      return false;
+      event.preventDefault();
     }
-
-    return true;
   }
 
   bindEvents() {
-    this.form.addEventListener('submit', (e) => {
-      if(this.validateEmail() & this.validateURL()) {
-        return true;
-      }
-
-      e.preventDefault();
+    this.form.addEventListener('submit', () => {
+      this.validateEmail();
+      this.validateURL();
     });
   }
 }
