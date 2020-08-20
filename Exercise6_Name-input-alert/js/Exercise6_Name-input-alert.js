@@ -1,22 +1,23 @@
-class Person {
+class PrintName {
   constructor(fname, lname) {
     this.fname = fname;
     this.lname = lname;
     this.textContainer = document.getElementById('container');
   }
 
-  storeEnteredValues(txt) {
+  getName(txt) {
     let val = '';
 
-    while(val == null || val.trim().length < 1) {
+    while(val == null || val.trim() === '') {
       val = prompt(`please enter ${txt}`);
     }
 
+    val = val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
     return val;
   }
 
-  displayStoredValues() {
-    let message = `Hello ${this.storeEnteredValues(this.fname)} ${this.storeEnteredValues(this.lname)}.`;
+  displayName() {
+    let message = `Hello ${this.getName(this.fname)} ${this.getName(this.lname)}.`;
 
     alert(message);
     this.textContainer.innerHTML = message;
@@ -24,6 +25,6 @@ class Person {
 }
 
 window.onload = function() {
-  let newPerson = new Person('first name', 'last name');
-  newPerson.displayStoredValues();
+  let newPerson = new PrintName('first name', 'last name');
+  newPerson.displayName();
 }

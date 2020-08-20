@@ -1,44 +1,46 @@
-const regex = {
-  email: /^[a-zA-Z0-9\._-]{2,}@[a-z0-9]{2,}\.[a-z]{2,5}(\.[a-z]{2,4})?$/,
-  url: /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/|www\.)([a-zA-Z0-9-]{2,})\.[a-z]{2,4}(\.[a-z]{2,4})?$/
-}
-
 class FormValidation {
-  constructor(elements) {
-    this.options = elements;
-    this.form = this.options.form;
-    this.emailInput = this.options.inputEmail;
-    this.urlInput = this.options.inputUrl;
+  constructor(form) {
+    this.form = form;
+    this.regexEmail = /^[a-zA-Z0-9]*([\-\.\_]{1}?[a-zA-Z0-9]*)?[\@]{1}[a-zA-Z0-9]{2,}([\-]{1}[a-zA-Z0-9]{2,})?[\.]{1}[a-z]{2,}([\.]{1}[a-z]{2,})?$/;
+    this.regexURL = /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/|www\.)([a-zA-Z0-9-]{2,})\.[a-z]{2,4}(\.[a-z]{2,4})?$/;
   }
 
-  checkInputsValidation(pattern, input) {
-    if(!pattern.test(input.value)) {
-      alert(`please enter a valid ${input.name}`);
-      input.focus();
+  validateEmail() {
+    let email = this.form['email'];
+
+    if(!this.regexEmail.test(email.value)) {
+      alert(`please enter a valid ${email.name}`);
       return false;
     }
 
     return true;
   }
 
-  formSubmission() {
+  validateURL() {
+    let url = this.form['url'];
+
+    if(!this.regexURL.test(url.value)) {
+      alert(`please enter a valid ${url.name}`);
+      return false;
+    }
+
+    return true;
+  }
+
+  bindEvents() {
     this.form.addEventListener('submit', (e) => {
-      if(this.checkInputsValidation(regex.email, this.emailInput) && this.checkInputsValidation(regex.url, this.urlInput)) {
+      if(this.validateEmail() & this.validateURL()) {
         return true;
       }
 
       e.preventDefault();
     });
   }
-};
+}
 
 window.onload = function() {
-  const options = {
-    form: document.querySelector('[data-form]'),
-    inputEmail: document.querySelector('[data-input=email]'),
-    inputUrl: document.querySelector('[data-input=url]'),
-  }
+  let form = document.querySelector('[data-form]');
 
-  let validateForm = new FormValidation(options);
-  validateForm.formSubmission();
+  let validateForm = new FormValidation(form);
+  validateForm.bindEvents();
 };
