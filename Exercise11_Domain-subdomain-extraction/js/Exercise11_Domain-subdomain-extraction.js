@@ -1,18 +1,16 @@
-const PATTERN_URL = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]*)?)(?:\.))?(?<domain>[\w\-]{1,}\.[a-z]{2,}(?:\.[a-z]{2,})?)(?:\/[\w\-\.\%\=\&\?\#]*)*?$/;
-
-class Address {
-  constructor(options) {
-    this.elements = options;
-    this.form = this.elements.form;
-    this.input = this.elements.input;
+class MatchWebURL {
+  constructor(form) {
+    this.form = form;
+    this.pattern = /^(?:http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/|www\.)?(?:(?<sub>(?:[\w\-]*)?)(?:\.))?(?<domain>[\w\-]{1,}\.[a-z]{2,}(?:\.[a-z]{2,})?)(?:\/[\w\-\.\%\=\&\?\#]*)*?$/;
   }
 
   validateAndMatchURL() {
-    let groupName = this.input.value.match(PATTERN_URL);
+    let input = this.form.url;
+    let groupName = input.value.match(this.pattern);
 
     if(!groupName) {
       alert('please enter a valid URL');
-      this.input.focus();
+      input.focus();
       return false;
     }
 
@@ -30,21 +28,15 @@ class Address {
 
   init() {
     this.form.addEventListener('submit', (e) => {
-      if(this.validateAndMatchURL()) {
-        return true;
-      }
-
+      this.validateAndMatchURL();
       e.preventDefault();
     });
   }
 }
 
 window.onload = function() {
-  let options = {
-    form: document.querySelector('[data-form]'),
-    input: document.querySelector('[data-input]')
-  };
+  let form = document.querySelector('[data-form]');
 
-  let address = new Address(options);
+  let address = new MatchWebURL(form);
   address.init();
 };
