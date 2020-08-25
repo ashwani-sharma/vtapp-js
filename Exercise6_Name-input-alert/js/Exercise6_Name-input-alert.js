@@ -2,18 +2,22 @@ class PrintName {
   constructor(fname, lname) {
     this.fname = fname;
     this.lname = lname;
-    this.textContainer = document.getElementById('container');
+    this.textContainer = document.querySelector('[data-id]');
   }
 
   getName(txt) {
     let val = '';
 
-    while(val == null || val.trim() === '') {
+    while(val === null || val.trim() === '') {
       val = prompt(`please enter ${txt}`);
     }
 
-    val = val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
+    this.capitalizeName(val);
     return val;
+  }
+
+  capitalizeName(vals) {
+    vals = vals.charAt(0).toUpperCase() + vals.slice(1).toLowerCase();
   }
 
   displayName() {

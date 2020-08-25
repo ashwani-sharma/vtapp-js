@@ -2,10 +2,10 @@ class FormValidation {
   constructor(form) {
     this.form = form;
     this.regexEmail = /^[a-zA-Z0-9]*([\-\.\_]{1}?[a-zA-Z0-9]*)?[\@]{1}[a-zA-Z0-9]{2,}([\-]{1}[a-zA-Z0-9]{2,})?[\.]{1}[a-z]{2,}([\.]{1}[a-z]{2,})?$/;
-    this.regexURL = /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/|www\.)([a-zA-Z0-9-]{2,})\.[a-z]{2,4}(\.[a-z]{2,4})?$/;
+    this.regexURL = /^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/|www\.)?([a-zA-Z0-9-]{2,})\.[a-z]{2,4}(\.[a-z]{2,4})?$/;
   }
 
-  validateEmail() {
+  validateEmail(event) {
     let email = this.form.email;
 
     if(!this.regexEmail.test(email.value)) {
@@ -14,7 +14,7 @@ class FormValidation {
     }
   }
 
-  validateURL() {
+  validateURL(event) {
     let url = this.form.url;
 
     if(!this.regexURL.test(url.value)) {
@@ -24,9 +24,9 @@ class FormValidation {
   }
 
   bindEvents() {
-    this.form.addEventListener('submit', () => {
-      this.validateEmail();
-      this.validateURL();
+    this.form.addEventListener('submit', (e) => {
+      this.validateEmail(e);
+      this.validateURL(e);
     });
   }
 }
